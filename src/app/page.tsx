@@ -12,7 +12,7 @@ import { Reviews } from "@/components/site/Reviews";
 import { Marquee, Services, Team } from "@/components/site/Services";
 import { getBookingSettings } from "@/lib/db";
 import { listClosures, listReviews, listServices, listStaff, listWorkingHours, reviewStats } from "@/lib/queries";
-import { hasSeparateAdminHost, isOnAdminHost } from "@/lib/host";
+import { adminEntryUrl, isOnAdminHost } from "@/lib/host";
 import { SITE } from "@/lib/site";
 import { shopNow } from "@/lib/time";
 
@@ -68,7 +68,7 @@ export default async function HomePage() {
     <BookingProvider data={{ services, staff, hours, settings, closedDates }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
       <FloatingTools />
-      <Navbar />
+      <Navbar adminUrl={adminEntryUrl()} />
       <main className="relative z-10">
         <Hero hours={hours} rating={reviews.stats} />
         <Marquee items={services.map((s) => s.name)} />
@@ -79,8 +79,7 @@ export default async function HomePage() {
         <Reviews initial={reviews} />
         <Contact hours={hours} />
       </main>
-      {/* Yönetim ayrı bir alan adındaysa (ADMIN_HOST) herkese açık sitede bağlantısı gösterilmez */}
-      <Footer showAdminLink={!hasSeparateAdminHost()} />
+      <Footer />
       <FloatingActions />
     </BookingProvider>
   );

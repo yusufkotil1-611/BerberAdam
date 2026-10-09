@@ -14,3 +14,6 @@ npm-debug.log*
 .DS_Store
 
 backups/
+
+# Proje klasörüne yanlışlıkla klonlanmış iç içe depo
+BerberAdam/

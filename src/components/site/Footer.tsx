@@ -6,7 +6,7 @@ import { useBooking } from "@/components/booking/BookingProvider";
 import { Logo } from "@/components/ui";
 import { MAPS_DIRECTIONS_URL, SITE, whatsappLink } from "@/lib/site";
 
-export function Footer({ showAdminLink = true }: { showAdminLink?: boolean }) {
+export function Footer() {
   const { openBooking } = useBooking();
   return (
     <footer className="relative z-10 border-t border-white/10 bg-ink-950/80 pb-28 pt-14 backdrop-blur sm:pb-10">
@@ -48,7 +48,6 @@ export function Footer({ showAdminLink = true }: { showAdminLink?: boolean }) {
         <div className="gold-rule" />
         <div className="mt-6 flex flex-col items-center justify-between gap-3 text-xs text-ink-400 sm:flex-row">
           <p>© {new Date().getFullYear()} {SITE.name}. Tüm hakları saklıdır.</p>
-          {showAdminLink && <a href="/admin" className="inline-flex items-center gap-1.5 transition hover:text-gold-300">Yönetim Paneli</a>}
         </div>
       </div>
 

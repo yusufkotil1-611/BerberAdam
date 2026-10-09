@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
-import { CalendarCheck, Menu, Phone, Volume2, VolumeX, X } from "lucide-react";
+import { CalendarCheck, ChevronRight, Menu, Phone, ShieldCheck, Volume2, VolumeX, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useBooking } from "@/components/booking/BookingProvider";
 import { useSound } from "@/components/SoundProvider";
@@ -17,7 +17,8 @@ const LINKS = [
   { href: "#iletisim", label: "İletişim" },
 ];
 
-export function Navbar() {
+/** adminUrl: Admin Paneli girişinin adresi (aynı sitede "/admin"; yönetim ayrı alan adındaysa o adres). */
+export function Navbar({ adminUrl = "/admin" }: { adminUrl?: string }) {
   const { openBooking } = useBooking();
   const { enabled, toggle } = useSound();
   const [scrolled, setScrolled] = useState(false);
@@ -87,7 +88,7 @@ export function Navbar() {
               onClick={() => setMenuOpen((v) => !v)}
               aria-label={menuOpen ? "Menüyü kapat" : "Menüyü aç"}
               aria-expanded={menuOpen}
-              className="grid h-10 w-10 place-items-center rounded-full border border-white/10 bg-white/5 lg:hidden"
+              className="grid h-10 w-10 place-items-center rounded-full border border-white/10 bg-white/5 transition hover:border-gold-500/60 hover:text-gold-300"
             >
               {menuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
@@ -101,7 +102,7 @@ export function Navbar() {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            className="fixed inset-0 z-40 bg-ink-950/95 pt-24 backdrop-blur-xl lg:hidden"
+            className="fixed inset-0 z-40 overflow-y-auto bg-ink-950/95 pb-10 pt-20 backdrop-blur-xl"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -115,17 +116,36 @@ export function Navbar() {
                   initial={{ opacity: 0, x: -24 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.05 * i }}
-                  className="border-b border-white/10 py-4 font-display text-3xl uppercase tracking-wide text-white transition hover:pl-3 hover:text-gold-300"
+                  className="border-b border-white/10 py-3 font-display text-2xl uppercase tracking-wide text-white transition hover:pl-3 hover:text-gold-300"
                 >
                   {l.label}
                 </motion.a>
               ))}
-              <a href={SITE.phoneTel} className="btn-ghost mt-6">
+              {/* Yönetici girişinin tek kapısı: Admin Paneli */}
+              <motion.a
+                href={adminUrl}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.05 * LINKS.length + 0.1 }}
+                className="group mt-6 flex items-center gap-3 rounded-2xl border border-gold-500/30 bg-gold-400/[0.06] px-4 py-3.5 transition hover:border-gold-400 hover:bg-gold-400/10"
+              >
+                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gold-400/15 text-gold-300">
+                  <ShieldCheck size={20} />
+                </span>
+                <span className="min-w-0 flex-1">
+                  <span className="block font-semibold text-white">Admin Paneli</span>
+                  <span className="block text-xs text-ink-300">Yönetici girişi</span>
+                </span>
+                <ChevronRight size={18} className="text-gold-400 transition group-hover:translate-x-1" />
+              </motion.a>
+
+              <a href={SITE.phoneTel} className="btn-ghost mt-3">
                 <Phone size={18} /> {SITE.phoneDisplay}
               </a>
               <button data-sfx="none" onClick={toggle} aria-pressed={enabled} className="btn-ghost mt-3">
                 {enabled ? <Volume2 size={18} /> : <VolumeX size={18} />} Sesler: {enabled ? "Açık" : "Kapalı"}
               </button>
+
             </nav>
           </motion.div>
         )}

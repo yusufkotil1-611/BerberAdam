@@ -68,6 +68,8 @@ Aşağıdaki adımları **iki kez** yapacaksınız: bir kez müşteri sitesi, bi
 >
 > **`ADMIN_INITIAL_PASSWORD` ne işe yarar?** Panel, internete açıldığı ilk saniyeden itibaren herkesin bildiği `000000` yerine sizin şifrenizle başlar. Yalnızca veri tabanı ilk oluşurken okunur. Sonradan **Ayarlar → Şifre Değiştir** ile değiştirebilirsiniz.
 
+> **Tek site yeterli mi?** İsterseniz yalnızca **bir** Netlify sitesi kurup `ADMIN_HOST` değişkenini **hiç eklemeyebilirsiniz**. O zaman yönetim paneli aynı adreste `/admin` olarak çalışır ve sitedeki menüde (üç çizgi) **Admin Paneli** girişi görünür. Daha az kurulum demektir; tek farkı, giriş sayfasının müşteri adresinde de bulunmasıdır (yine şifre ve deneme sınırıyla korunur). İki site kurarsanız, menüdeki **Admin Paneli** bağlantısı yönetim sitesinin adresine gider.
+
 ## 4. Kontrol listesi
 
 Her iki site de "Published" olunca:

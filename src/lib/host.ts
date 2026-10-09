@@ -32,6 +32,16 @@ export function hasSeparateAdminHost(): boolean {
   return adminHosts().length > 0;
 }
 
+/**
+ * "Admin Paneli" girişinin adresi. Yönetim ayrı alan adındaysa (ADMIN_HOST) o adrese, değilse aynı sitedeki /admin'e gider.
+ */
+export function adminEntryUrl(): string {
+  const host = adminHosts()[0];
+  if (!host) return "/admin";
+  const local = /^(localhost|127\.0\.0\.1|\[::1\]|[^:]*\.localhost)(:\d+)?$/.test(host);
+  return `${local ? "http" : "https"}://${host}/admin`;
+}
+
 /** API rotaları için: bu istek yönetim işlemlerine açık bir alan adından mı geliyor? */
 export function isAdminAllowedFor(req: Request): boolean {
   if (!hasSeparateAdminHost()) return true;

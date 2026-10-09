@@ -10,6 +10,8 @@ Sonunda iki ayrı adresiniz olacak:
 **Parçalar:** Netlify (siteyi çalıştırır, ücretsiz adres verir) · Turso (verilerin tutulduğu ücretsiz bulut veri tabanı) · GitHub (kodu Netlify'a taşır).
 Sunucu kurmak, port açmak, kredi kartı vermek gerekmez.
 
+> Yalnızca **demo** göstermek istiyorsanız Vercel'in ücretsiz planı da kullanılabilir: [DEPLOY-VERCEL.md](DEPLOY-VERCEL.md). Gerçek müşteri randevusu alınacak ticari yayın için bu kılavuzdaki Netlify yolunu (ya da Vercel Pro'yu) kullanın.
+
 > Hesapları (GitHub, Turso, Netlify) sizin açmanız gerekir; kimlik bilgisi istedikleri için bunları sizin yerinize ben yapamam. Uygulama tarafını yerelde test ettim; **Netlify ve Turso üzerinde gerçek bir deneme yapmadım**. Bu yüzden en sonda bir kontrol listesi ve sorun giderme tablosu var. Takıldığınız yerin ekran görüntüsünü ya da hata metnini bana gönderin.
 
 ---

@@ -33,7 +33,7 @@ Ekstra kurulum gerekmez: yerelde veri tabanı (`data/berberadam.db`, Node'un yer
 Panel boşken nasıl göründüğünü görmek için **Admin → Ayarlar → Örnek Veri Yükle** ile 14 örnek müşteri ve son 4 hafta + önümüzdeki hafta için yaklaşık 300 örnek randevu ekleyebilirsiniz. Sitenin ilk açılışta gösterdiği 4 örnek yorum da "demo" olarak işaretlidir. **Canlıya almadan önce "Demo Verilerini Temizle"ye basın**; gerçek kayıtlarınıza dokunmaz.
 
 ### Canlıya alma (ücretsiz, sunucusuz)
-Müşteri sitesi ve yönetim paneli **iki ayrı adreste** yayınlanır (`ADMIN_HOST` ortam değişkeni). Netlify (barındırma) + Turso (bulut SQLite) ile adım adım kılavuz: **[DEPLOY.md](DEPLOY.md)**. Kendi sunucunuzda çalıştırmak isterseniz: [deploy/VPS-ORACLE.md](deploy/VPS-ORACLE.md). Ortam değişkenleri: [.env.example](.env.example).
+Müşteri sitesi ve yönetim paneli **iki ayrı adreste** yayınlanır (`ADMIN_HOST` ortam değişkeni). Netlify (barındırma) + Turso (bulut SQLite) ile adım adım kılavuz: **[DEPLOY.md](DEPLOY.md)**. Berbere göstermek için **demo** olarak Vercel Hobby + Turso: **[DEPLOY-VERCEL.md](DEPLOY-VERCEL.md)** (ticari yayın için Netlify ya da Vercel Pro'ya geçilmelidir). Kendi sunucunuzda çalıştırmak isterseniz: [deploy/VPS-ORACLE.md](deploy/VPS-ORACLE.md). Ortam değişkenleri: [.env.example](.env.example).
 
 ---
 

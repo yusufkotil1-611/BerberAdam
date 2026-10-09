@@ -1,0 +1,30 @@
+# BERBERADAM — systemd servis dosyası
+# Kurulum:
+#   sudo cp deploy/berberadam.service /etc/systemd/system/berberadam.service
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now berberadam
+# Loglar:  journalctl -u berberadam -f
+#
+# Ortam değişkenleri (ADMIN_HOST, PUBLIC_URL, ADMIN_INITIAL_PASSWORD...) uygulama klasöründeki
+# .env.production.local dosyasından okunur (bkz. DEPLOY.md).
+
+[Unit]
+Description=BERBERADAM web sitesi ve yonetim paneli
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/BERBERADAM
+Environment=NODE_ENV=production
+# Yalnızca yerel arayüzü dinle; dışarıya Caddy açar
+ExecStart=/usr/bin/node node_modules/next/dist/bin/next start -H 127.0.0.1 -p 3000
+Restart=always
+RestartSec=3
+# Güvenlik sıkılaştırması
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

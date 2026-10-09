@@ -1,0 +1,38 @@
+# BERBERADAM — Caddy (otomatik HTTPS) yapılandırması
+# Kullanım: /etc/caddy/Caddyfile içine kopyalayın, iki alan adını kendinizinkilerle değiştirin:
+#   sudo cp deploy/Caddyfile /etc/caddy/Caddyfile
+#   sudo nano /etc/caddy/Caddyfile
+#   sudo systemctl reload caddy
+#
+# Caddy, Let's Encrypt sertifikalarını kendisi alır ve yeniler (80 ve 443 portları açık olmalı).
+# Next.js sadece 127.0.0.1:3000'i dinler; dışarıdan yalnızca Caddy üzerinden erişilir.
+# Caddy, istemcinin gönderdiği sahte X-Forwarded-For başlıklarını silip gerçek IP'yi yazar;
+# uygulamadaki giriş hız sınırı bu sayede atlatılamaz.
+
+{
+	# Sertifika bildirimleri için e-posta (isteğe bağlı ama önerilir)
+	# email siz@ornek.com
+}
+
+# ===== Müşteri sitesi + randevu =====
+berberadam.duckdns.org {
+	encode zstd gzip
+	reverse_proxy 127.0.0.1:3000
+
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		-Server
+	}
+}
+
+# ===== Yönetim paneli (yalnızca /admin ve /api/admin açık; ADMIN_HOST ile aynı olmalı) =====
+berberadam-yonetim.duckdns.org {
+	encode zstd gzip
+	reverse_proxy 127.0.0.1:3000
+
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		X-Robots-Tag "noindex, nofollow"
+		-Server
+	}
+}
